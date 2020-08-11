@@ -12,6 +12,8 @@ public class ManagerData {
 
     ArrayList<String[]> arrayListToTakeData= new ArrayList<>();
 
+    ArrayList<String[]> arrayListToShowData= new ArrayList<>();
+
     public void writeFile(){
     try {
         File file  = new File("Data");
@@ -32,20 +34,31 @@ public class ManagerData {
         for (String e: arrayListToReadData
              ) {
             String[] arrayToPush = new String[1];
-            System.out.println(e);
+//            System.out.println(e);
             arrayToPush[0]=e;
             arrayListToTakeData.add(arrayToPush);
+        }
+        for (String[] e:arrayListToTakeData
+        ) {
+            for (String array:e
+            ) {
+                String[] result = array.split(",");
+                arrayListToShowData.add(result);
+            }
+        }
+    }
+    public void showFullInfor(){
+        for (String[] e:arrayListToShowData
+             ) {
+            for (String infor:e
+                 ) {
+                System.out.print(infor+" ");
+            }
         }
     }
 
     public void test(){
-        for (String[] e:arrayListToTakeData
-             ) {
-            for (String hihi:e
-                 ) {
-                System.out.println(hihi);
-            }
-        }
+
     }
 
 
@@ -57,6 +70,21 @@ public class ManagerData {
             String hihi = null;
             while ((hihi=bufferedWriter.readLine())!=null){
                 arrayListToReadData.add(hihi);
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public void readfile2(){
+        try {
+            File file  = new File("Data");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedWriter = new BufferedReader(fileReader);
+            String hihi = null;
+            while ((hihi=bufferedWriter.readLine())!=null){
+                arrayListToReadData.add(hihi);
+                System.out.println(hihi);
             }
 
         }catch (Exception e){
@@ -120,6 +148,7 @@ public class ManagerData {
                 switch (optionOfCase1){
                     case 1:{
                         showInfor();
+                        showFullInfor();
                         break;
                     }
                     case 2:{
@@ -141,6 +170,7 @@ public class ManagerData {
             }
             case 3: {
                 writeFile();
+                readFile();
                 break;
             }
             case 4: {
@@ -152,7 +182,7 @@ public class ManagerData {
                 break;
             }
             case 6:{
-                readFile();
+                readfile2();
                 break;
             }
             case 7:{
